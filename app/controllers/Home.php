@@ -1,9 +1,15 @@
 <?php
 
-Class Home {
+class Home extends Controller
+{
+    public function __construct()
+    {
+        $this->checkAuthentication();
+    }
     public function index()
     {
-        echo "Home/index";
+        $this->view('templates/header');
+        $this->view('home/index');
+        $this->view('templates/footer');
     }
-    
 }

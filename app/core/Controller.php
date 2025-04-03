@@ -21,4 +21,13 @@ class Controller
             exit;
         }
     }
+    public function adminAuthorization()
+    {
+        if ($_SESSION['user']['user_role'] !== 'admin') {
+            $this->view('templates/header');
+            $this->view('templates/404');
+            $this->view('templates/footer');
+            exit;
+        }
+    }
 }

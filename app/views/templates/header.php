@@ -49,7 +49,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars">
-                            <!-- Hello, <?= $_SESSION['user']['nama'] ?> -->
+                            Hello, <?= $_SESSION['user']['nama_karyawan'] ?>
                         </i>
                     </a>
                 </li>
@@ -100,10 +100,10 @@
                             </a>
                         </li>
                         <?php
-                        if ($_SESSION['user']['role'] === 'admin') :
+                        if ($_SESSION['user']['user_role'] === 'admin') :
                         ?>
                             <li class="nav-item">
-                                <a href="<?= APP_URL; ?>/user" class="nav-link">
+                                <a href="<?= APP_URL; ?>/users" class="nav-link">
                                     <i class='fas fa-chevron-circle-right'></i>
                                     <p>Manajemen User</p>
                                 </a>

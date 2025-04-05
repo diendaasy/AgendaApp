@@ -51,10 +51,10 @@
                 <div>
                     <a class="btn btn-info" href="<?= APP_URL; ?>/users">Kembali</a>
                 </div>
-            </div>
-            <div>
-                <button type="reset" class="btn btn-default">Reset</button>
-                <button type="submit" class="btn btn-primary">Simpan data</button>
+                <div>
+                    <button type="reset" class="btn btn-default">Reset</button>
+                    <button type="submit" class="btn btn-primary">Simpan data</button>
+                </div>
             </div>
         </div>
     </form>

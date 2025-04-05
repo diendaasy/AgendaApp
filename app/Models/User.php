@@ -34,10 +34,22 @@ class User
         $this->db->query($query);
         $this->db->bind('username', $data['username']);
         $this->db->bind('password', $data['password']);
-        $this->db->bind('nama_karyawan',$data ['nama_karyawan']);
-        $this->db->bind('jabatan',$data ['jabatan']);
+        $this->db->bind('nama_karyawan', $data['nama_karyawan']);
+        $this->db->bind('jabatan', $data['jabatan']);
         $this->db->execute();
 
         return $this->db->rowCountAffected();
+    }
+
+    public function getAllKaryawan()
+    {
+        $this->db->query("SELECT * FROM $this->table WHERE user_role = 'karyawan'");
+        return $this->db->get();
+    }
+
+    public function getAllApprover()
+    {
+        $this->db->query("SELECT * FROM $this->table WHERE user_role = 'approver'");
+        return $this->db->get();
     }
 }

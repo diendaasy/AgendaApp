@@ -103,6 +103,16 @@
                         if ($_SESSION['user']['user_role'] === 'admin') :
                         ?>
                             <li class="nav-item">
+                                <a href="<?= APP_URL; ?>/agendas" class="nav-link">
+                                    <i class='fas fa-chevron-circle-right'></i>
+                                    <p>Manajemen agenda</p>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php
+                        if ($_SESSION['user']['user_role'] === 'admin') :
+                        ?>
+                            <li class="nav-item">
                                 <a href="<?= APP_URL; ?>/users" class="nav-link">
                                     <i class='fas fa-chevron-circle-right'></i>
                                     <p>Manajemen User</p>

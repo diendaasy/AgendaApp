@@ -100,7 +100,7 @@
                             </a>
                         </li>
                         <?php
-                        if ($_SESSION['user']['user_role'] === 'admin') :
+                        if ($_SESSION['user']['user_role'] === 'admin' || $_SESSION['user']['user_role'] === 'approver') :
                         ?>
                             <li class="nav-item">
                                 <a href="<?= APP_URL; ?>/agendas" class="nav-link">

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= APP_NAME; ?></title>
     <!-- icon -->
-    <link rel="icon" type="image/x-icon" href="<?= APP_URL; ?>/img/icon.png">
+    <link rel="icon" type="image/x-icon" href="<?= APP_URL; ?>/img/logo_bps.png">
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -63,9 +63,6 @@
                             <i class="far fa-user"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-key mr-2"></i> Ganti Password
-                            </a>
                             <div class="dropdown-divider"></div>
                             <a href="<?= APP_URL; ?>/auth/logout" class="dropdown-item dropdown-footer">
                                 <i class="fas fa-sign-out-alt"></i> Logout
@@ -99,16 +96,12 @@
                                 <p>Dashboard</p>
                             </a>
                         </li>
-                        <?php
-                        if ($_SESSION['user']['user_role'] === 'admin' || $_SESSION['user']['user_role'] === 'approver') :
-                        ?>
-                            <li class="nav-item">
-                                <a href="<?= APP_URL; ?>/agendas" class="nav-link">
-                                    <i class='fas fa-chevron-circle-right'></i>
-                                    <p>Manajemen agenda</p>
-                                </a>
-                            </li>
-                        <?php endif; ?>
+                        <li class="nav-item">
+                            <a href="<?= APP_URL; ?>/agendas" class="nav-link">
+                                <i class='fas fa-chevron-circle-right'></i>
+                                <p>Manajemen Agenda</p>
+                            </a>
+                        </li>
                         <?php
                         if ($_SESSION['user']['user_role'] === 'admin') :
                         ?>

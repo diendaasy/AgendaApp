@@ -6,7 +6,25 @@ let Toast = Swal.mixin({
   showConfirmButton: false,
   timer: 5000,
 });
-``;
+
+function deleteConfirmation(e) {
+  e.preventDefault();
+  let url = e.currentTarget.getAttribute("href");
+  let keterangan = e.currentTarget.getAttribute("data-keterangan");
+  Swal.fire({
+    title: "Pesan Konfirmasi",
+    html: `Apakah anda yakin ingin menghapus data <b>${keterangan}</b> ?`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmbuttoncolor: "#d33",
+    cancelbuttoncolor: "#3085d6",
+    confirmButtonText: "hapus!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location.href = url;
+    }
+  });
+}
 
 $(function () {
   $(".select2").select2({
@@ -47,26 +65,21 @@ function rejectConfirmation(e) {
     },
     showCancelButton: true,
     confirmButtonText: "Submit",
-    showLoaderOnConfirm: true,
-    preConfirm: async (reason) => {
-      try {
-        const dataBody = {
-          reason: reason,
-        };
-        $.ajax({
-          url: baseUrl,
-          type: "post",
-          dataType: "json",
-          data: JSON.stringify(dataBody),
-          success: () => {
-            console.log("success");
-            ;
-          },
-        });
-      } catch (error) {
-        Swal.showValidationMessage(`Request failed: ${error}`);
-      }
-    },
-    allowOutsideClick: () => !Swal.isLoading(),
+  }).then((result) => {
+    if (result.isConfirmed && result.value) {
+      $.ajax({
+        url: baseUrl,
+        method: "POST",
+        data: { reason: result.value },
+        success: function (response) {
+          Swal.fire({
+            icon: response.status,
+            title: response.message,
+          }).then(() => {
+            window.location.href = response.redirect;
+          });
+        },
+      });
+    }
   });
 }

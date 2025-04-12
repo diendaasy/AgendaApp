@@ -8,8 +8,14 @@ class Home extends Controller
     }
     public function index()
     {
+        $agenda = $this->model('agenda')->getNotificationForKaryawan($_SESSION['user']['user_id']);
+        $agendaKebersamaan = $this->model('agenda')->getAllAgendaKebersamaan();
+        $data = [
+            'agenda' => $agenda,
+            'agendaKebersamaan' => $agendaKebersamaan
+        ];
         $this->view('templates/header');
-        $this->view('home/index');
+        $this->view('home/index', $data);
         $this->view('templates/footer');
     }
 }

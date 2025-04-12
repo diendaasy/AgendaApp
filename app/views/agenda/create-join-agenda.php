@@ -3,38 +3,8 @@
         <h3 class="card-tittle"><?= $data['judul']; ?></h3>
     </div>
 
-    <form action="<?= APP_URL; ?>/agendas/save" method="post">
+    <form action="<?= APP_URL; ?>/agendas/savejoinagenda" method="post">
         <div class="card-body">
-            <div class="form-group">
-                <div class="row">
-                    <label for="user_id" class="col-sm-2 col-form-label">Karyawan<span class="text-danger">*</span></label>
-                    <div class="col-sm-10">
-                        <select class="custom-select select2" id="user_id" name="user_id">
-                            <option value="">Pilih Karyawan</option>
-                            <?php
-                            foreach ($data['karyawan'] as $karyawan):
-                            ?>
-                                <option value="<?= $karyawan['user_id']; ?>"><?= $karyawan['nama_karyawan']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <label for="jenis_agenda_id" class="col-sm-2 col-form-label">Jenis Agenda<span class="text-danger">*</span></label>
-                    <div class="col-sm-10">
-                        <select class="custom-select select2" id="jenis_agenda_id" name="jenis_agenda_id">
-                            <option value="">Pilih Jenis Agenda</option>
-                            <?php
-                            foreach ($data['jenisAgenda'] as $jenisAgenda):
-                            ?>
-                                <option value="<?= $jenisAgenda['jenis_agenda_id']; ?>"><?= $jenisAgenda['nama_jenis']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-            </div>
             <div class="form-group">
                 <div class="row">
                     <label for="assigndate" class="col-sm-2 col-form-label">Tanggal agenda</label>

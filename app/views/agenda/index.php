@@ -6,8 +6,11 @@
             if ($_SESSION['user']['user_role'] === 'admin') :
             ?>
                 <div class="d-flex justify-content-end mt-1">
-                    <a href="<?= APP_URL; ?>/agendas/create" class="btn btn-primary">
-                        <i class="fa fa-plus"></i> agenda
+                    <a href="<?= APP_URL; ?>/agendas/create" class="btn btn-primary mr-2">
+                        <i class="fa fa-plus"></i> Agenda
+                    </a>
+                    <a href="<?= APP_URL; ?>/agendas/createJoinAgenda" class="btn btn-primary">
+                        <i class="fa fa-plus"></i> Agenda kebersamaan
                     </a>
                 </div>
             <?php endif; ?>
@@ -24,12 +27,21 @@
                         <th>Keterangan</th>
                         <!-- <th>Dibuat pada</th>
                         <th>Dibuat oleh</th> -->
-                        <th>Diapprove pada</th>
-                        <th>Diapprove oleh</th>
+                        <?php
+                        if ($_SESSION['user']['user_role'] !== 'karyawan') :
+                        ?>
+                            <th>Diapprove pada</th>
+                            <th>Diapprove oleh</th>
+                        <?php endif; ?>
                         <?php
                         if ($_SESSION['user']['user_role'] === 'approver') :
                         ?>
                             <th>Approval</th>
+                        <?php endif; ?>
+                        <?php
+                        if ($_SESSION['user']['user_role'] === 'admin') :
+                        ?>
+                            <th>Aksi</th>
                         <?php endif; ?>
                     </tr>
                 </thead>
@@ -40,7 +52,13 @@
                         <tr align="center">
                             <td><?= $agenda['agenda_id']; ?></td>
                             <td><?= $agenda['nama_karyawan']; ?></td>
-                            <td><?= $agenda['jenis_agenda']; ?></td>
+                            <?php
+                            if (isset($agenda['jenis_agenda'])):
+                            ?>
+                                <td><?= $agenda['jenis_agenda']; ?></td>
+                            <?php else: ?>
+                                <td><span class="badge badge-primary">Agenda Kebersamaan</span></td>
+                            <?php endif; ?>
                             <td><?= $agenda['assign_at']; ?></td>
                             <?php
                             $status = '';
@@ -59,8 +77,12 @@
                             <td><?= $agenda['keterangan']; ?></td>
                             <!-- <td><?= $agenda['created_at']; ?></td>
                             <td><?= $agenda['dibuat_oleh']; ?></td> -->
-                            <td><?= $agenda['approved_at']; ?></td>
-                            <td><?= $agenda['diapprove_oleh']; ?></td>
+                            <?php
+                            if ($_SESSION['user']['user_role'] !== 'karyawan') :
+                            ?>
+                                <td><?= $agenda['approved_at']; ?></td>
+                                <td><?= $agenda['diapprove_oleh']; ?></td>
+                            <?php endif; ?>
                             <?php
                             if ($_SESSION['user']['user_role'] === 'approver') :
                             ?>
@@ -69,11 +91,27 @@
                                         <a href="<?= APP_URL; ?>/agendas/approve/<?= $agenda['agenda_id']; ?>" class="btn btn-primary mr-2">
                                             <i class="fa fa-check"></i>
                                         </a>
-                                        <a href="<?= APP_URL; ?>/agenda/reject/<?= $agenda['agenda_id']; ?>" class="btn btn-danger" onclick="rejectConfirmation(event)">
+                                        <a href="<?= APP_URL; ?>/agendas/reject/<?= $agenda['agenda_id']; ?>" class="btn btn-danger" onclick="rejectConfirmation(event)">
                                             <i class="fa fa-times"></i>
                                         </a>
                                     </div>
                                 </td>
+                            <?php endif; ?>
+                            <?php
+                            if ($_SESSION['user']['user_role'] === 'admin' && !isset($agenda['jenis_agenda'])) :
+                            ?>
+                                <td>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="<?= APP_URL; ?>/agendas/editJoinAgenda/<?= $agenda['agenda_id']; ?>" class="btn btn-primary mr-2">
+                                            <i class="fa fa-pen"></i>
+                                        </a>
+                                        <a href="<?= APP_URL; ?>/agendas/deleteJoinAgenda/<?= $agenda['agenda_id']; ?>" class="btn btn-danger" data-keterangan="<?= $agenda['keterangan']; ?>" onclick="deleteConfirmation(event)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            <?php else : ?>
+                                <td>-</td>
                             <?php endif; ?>
                         </tr>
                     <?php endforeach; ?>

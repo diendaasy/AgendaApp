@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 12 Apr 2025 pada 13.04
+-- Waktu pembuatan: 15 Apr 2025 pada 08.38
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -49,12 +49,8 @@ CREATE TABLE `tbl_agenda` (
 --
 
 INSERT INTO `tbl_agenda` (`agenda_id`, `jenis_agenda_id`, `user_id`, `status`, `keterangan`, `assign_at`, `read_at`, `created_at`, `updated_at`, `updated_by`, `approved_at`, `approved_by`, `created_by`, `reject_reason`) VALUES
-(1, 3, 1, 'approved', 'pasar agung', '2025-04-12', NULL, '2025-04-05 07:16:58', '2025-04-05 07:16:58', 0, '2025-04-12 07:40:11', 4, 2, ''),
-(2, 1, 1, 'rejected', 'test', '2025-05-01', NULL, '2025-04-05 09:42:27', '2025-04-05 09:42:27', 0, '2025-04-12 07:40:21', 4, 2, 'salah tanggal'),
-(3, 5, 3, 'created', 'kemiri muka', '2025-04-28', NULL, '2025-04-05 09:44:29', '2025-04-05 09:44:29', 0, NULL, NULL, 2, ''),
-(4, 1, 1, 'approved', 'test', '2025-04-12', NULL, '2025-04-12 09:02:25', '2025-04-12 09:02:25', 0, '2025-04-12 09:03:58', 4, 2, ''),
-(6, NULL, NULL, 'approved', 'makan', '2025-04-12', NULL, '2025-04-12 10:42:50', '2025-04-12 10:42:50', NULL, '2025-04-12 10:42:50', 2, 2, ''),
-(7, NULL, NULL, 'approved', 'minum', '2025-04-13', NULL, '2025-04-12 10:43:02', '2025-04-12 10:43:02', NULL, '2025-04-12 10:43:02', 2, 2, '');
+(8, NULL, NULL, 'approved', 'Presentasi', '2025-04-15', NULL, '2025-04-15 06:35:27', '2025-04-15 06:35:27', NULL, '2025-04-15 06:35:27', 2, 2, ''),
+(9, 1, 5, 'approved', 'tepat waktu!', '2025-04-15', NULL, '2025-04-15 06:35:52', '2025-04-15 06:35:52', NULL, '2025-04-15 06:37:51', 4, 2, '');
 
 -- --------------------------------------------------------
 
@@ -102,11 +98,12 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`user_id`, `user_role`, `username`, `password`, `nama_karyawan`, `jabatan`, `created_at`, `updated_at`) VALUES
-(0, 'karyawan', 'Arif', 'bps3276', 'Arif', 'Ahli muda', '2025-04-12 09:10:25', '2025-04-12 09:10:25'),
 (1, 'karyawan', 'Lola', 'Bps3276', 'Lola Dwi Ferbyanti', 'Statistisi Ahli Muda', '2025-03-29 07:22:48', '2025-03-29 07:22:48'),
 (2, 'admin', 'Perdi', 'Bps3276', 'Perdi irmawan p', 'Statistisi Ahli Muda', '2025-03-29 07:25:08', '2025-03-29 07:25:08'),
 (3, 'karyawan', 'jati', 'Bps3276', 'Djati', 'Ahli muda', '2025-04-05 07:59:05', '2025-04-05 07:59:05'),
-(4, 'approver', 'nisa', 'Bps3276', 'Anissa', 'Ahli muda', '2025-04-05 07:59:41', '2025-04-05 07:59:41');
+(4, 'approver', 'nisa', 'Bps3276', 'Anissa', 'Ahli muda', '2025-04-05 07:59:41', '2025-04-05 07:59:41'),
+(5, 'karyawan', 'duyi', 'bps123', 'dinda', 'pelajar', '2025-04-15 06:34:30', '2025-04-15 06:34:30'),
+(6, 'karyawan', 'wahyu', 'vospid', 'wahyudi', 'guru', '2025-04-15 06:34:56', '2025-04-15 06:34:56');
 
 --
 -- Indexes for dumped tables
@@ -143,17 +140,13 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT untuk tabel `tbl_agenda`
 --
 ALTER TABLE `tbl_agenda`
-  MODIFY `agenda_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `agenda_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- AUTO_INCREMENT untuk tabel `tbl_user`
 --
-
---
--- Ketidakleluasaan untuk tabel `tbl_agenda`
---
-ALTER TABLE `tbl_agenda`
-  ADD CONSTRAINT `tbl_agenda_ibfk_1` FOREIGN KEY (`updated_by`) REFERENCES `tbl_user` (`user_id`);
+ALTER TABLE `tbl_user`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

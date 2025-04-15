@@ -55,7 +55,7 @@ class Agenda
 
     public function getAllAgendasNeedApproval()
     {
-        $this->db->query("SELECT tja.nama_jenis as jenis_agenda, ta.keterangan, ta.agenda_id, ta.assign_at, ta.status, ta.created_at, ta.approved_at, tu.nama_karyawan AS nama_karyawan, tu2.nama_karyawan as dibuat_oleh, tu3.nama_karyawan as diapprove_oleh  
+        $this->db->query("SELECT tja.nama_jenis as jenis_agenda, ta.keterangan, ta.agenda_id, ta.assign_at, ta.status, ta.created_at, ta.approved_at, tu.nama_karyawan AS nama_karyawan, tu2.nama_karyawan as dibuat_oleh, tu3.nama_karyawan as diapprove_oleh
         FROM $this->table ta 
         LEFT JOIN $this->tableJenisAgenda tja 
         ON ta.jenis_agenda_id = tja.jenis_agenda_id 

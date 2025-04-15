@@ -30,7 +30,7 @@ class User
     }
     public function register($data)
     {
-        $query = "INSERT INTO $this->table VALUES ('', 'karyawan', :username, :password, :nama_karyawan, :jabatan, current_timestamp(), current_timestamp())";
+        $query = "INSERT INTO $this->table (user_role, username, password, nama_karyawan, jabatan, created_at, updated_at) VALUES ('karyawan', :username, :password, :nama_karyawan, :jabatan, current_timestamp(), current_timestamp())";
         $this->db->query($query);
         $this->db->bind('username', $data['username']);
         $this->db->bind('password', $data['password']);

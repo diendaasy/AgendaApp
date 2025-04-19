@@ -26,6 +26,25 @@ function deleteConfirmation(e) {
   });
 }
 
+function deleteUserConfirmation(e) {
+  e.preventDefault();
+  let url = e.currentTarget.getAttribute("href");
+  let nama = e.currentTarget.getAttribute("data-nama");
+  Swal.fire({
+    title: "Pesan Konfirmasi",
+    html: `Apakah anda yakin ingin menghapus data <b>${nama}</b> ?`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmbuttoncolor: "#d33",
+    cancelbuttoncolor: "#3085d6",
+    confirmButtonText: "hapus!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location.href = url;
+    }
+  });
+}
+
 $(function () {
   $(".select2").select2({
     theme: "bootstrap4",

@@ -1,6 +1,6 @@
 <?php
 
-define('APP_NAME', 'Agenda App');
+define('APP_NAME', 'Agenda BPS');
 define('APP_VERSION', '1.0.0');
 define('APP_URL', 'http://localhost/AgendaApp/public');
 

@@ -38,11 +38,7 @@
                         ?>
                             <th>Approval</th>
                         <?php endif; ?>
-                        <?php
-                        if ($_SESSION['user']['user_role'] === 'admin') :
-                        ?>
-                            <th>Aksi</th>
-                        <?php endif; ?>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -88,12 +84,16 @@
                             ?>
                                 <td>
                                     <div class="d-flex justify-content-center">
-                                        <a href="<?= APP_URL; ?>/agendas/approve/<?= $agenda['agenda_id']; ?>" class="btn btn-primary mr-2">
-                                            <i class="fa fa-check"></i>
-                                        </a>
-                                        <a href="<?= APP_URL; ?>/agendas/reject/<?= $agenda['agenda_id']; ?>" class="btn btn-danger" onclick="rejectConfirmation(event)">
-                                            <i class="fa fa-times"></i>
-                                        </a>
+                                        <?php
+                                        if ($agenda['status'] === 'created') :
+                                        ?>
+                                            <a href="<?= APP_URL; ?>/agendas/approve/<?= $agenda['agenda_id']; ?>" class="btn btn-primary mr-2">
+                                                <i class="fa fa-check"></i>
+                                            </a>
+                                            <a href="<?= APP_URL; ?>/agendas/reject/<?= $agenda['agenda_id']; ?>" class="btn btn-danger" onclick="rejectConfirmation(event)">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        <?php endif; ?>
                                     </div>
                                 </td>
                             <?php endif; ?>

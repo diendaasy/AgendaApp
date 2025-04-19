@@ -7,7 +7,7 @@
     <title><?= APP_NAME; ?></title>
 
     <!-- icon -->
-    <link rel="icon" type="image/x-icon" href="<?= APP_URL; ?>/img/icon.png">
+    <link rel="icon" type="image/x-icon" href="<?= APP_URL; ?>/img/logo_bps.png">
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -19,6 +19,14 @@
     <link rel="stylesheet" href="<?= APP_URL; ?>/dist/css/adminlte.min.css">
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="<?= APP_URL; ?>/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+
+    <style>
+        body {
+            background-image: url(img/logo_login_bps.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 </head>
 
 <body class="hold-transition login-page">

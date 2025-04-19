@@ -13,7 +13,7 @@ class Agendas extends Controller
         $this->view('templates/header');
         $data['judul'] = 'Data Agenda';
         if ($_SESSION['user']['user_role'] === 'approver') {
-            $data['agenda'] = $this->model('agenda')->getAllAgendasNeedApproval();
+            $data['agenda'] = $this->model('agenda')->getAllAgendasApprover();
         } else if ($_SESSION['user']['user_role'] === 'karyawan') {
             $data['agenda'] = $this->model('agenda')->getAllAgendaForKaryawan($_SESSION['user']['user_id']);
         } else {

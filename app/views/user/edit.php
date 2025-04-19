@@ -3,13 +3,13 @@
         <h3 class="card-tittle"><?= $data['judul']; ?></h3>
     </div>
 
-    <form action="<?= APP_URL; ?>/users/save" method="post">
+    <form action="<?= APP_URL; ?>/users/update/<?= $data['user']['user_id']; ?>" method="post">
         <div class="card-body">
             <div class="form-group">
                 <div class="row">
                     <label for="nama_karyawan" class="col-sm-2 col-form-label"> Nama lengkap<span class="text-danger">*</span></label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nama_karyawan" name="nama_karyawan" autocomplete="off" />
+                        <input type="text" class="form-control" id="nama_karyawan" name="nama_karyawan" autocomplete="off" value="<?= $data['user']['nama_karyawan']; ?>" />
                     </div>
                 </div>
             </div>
@@ -17,15 +17,15 @@
                 <div class="row">
                     <label for="username" class="col-sm-2 col-form-label"> Username<span class="text-danger">*</span></label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="username" name="username" autocomplete="off" />
+                        <input type="text" class="form-control" id="username" name="username" autocomplete="off" value="<?= $data['user']['username']; ?>" disabled />
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="row">
-                    <label for="jabatan" class="col-sm-2 col-form-label">Jabatan<span class="text-danger">*</span></label>
+                    <label for="jabatan" class="col-sm-2 col-form-label">jabatan<span class="text-danger">*</span></label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="jabatan" name="jabatan" autocomplete="off" />
+                        <input type="text" class="form-control" id="jabatan" name="jabatan" autocomplete="off" value="<?= $data['user']['jabatan']; ?>" />
                     </div>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                 <div class="row">
                     <label for="tanggal_lahir" class="col-sm-2 col-form-label">Tanggal Lahir<span class="text-danger">*</span></label>
                     <div class="col-sm-10 input-group date" data-target-input="nearest" id="datetimepicker">
-                        <input class="form-control datetimepicker-input" name="tanggal_lahir" data-target="#datetimepicker">
+                        <input class="form-control datetimepicker-input" name="tanggal_lahir" data-target="#datetimepicker" value="<?= $data['user']['tanggal_lahir']; ?>">
                         <div class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                         </div>
@@ -44,26 +44,10 @@
                 <div class="row">
                     <label for="jenis_kelamin" class="col-sm-2 col-form-label">Jenis kelamin<span class="text-danger">*</span></label>
                     <div class="col-sm-2">
-                        <input type="radio" class="form-check-input" name="jenis_kelamin" value="Laki-laki" /> Laki-laki
+                        <input type="radio" class="form-check-input" name="jenis_kelamin" value="Laki-laki" <?php if ($data['user']['jenis_kelamin'] === 'Laki-laki') : ?>checked<?php endif; ?> /> Laki-laki
                     </div>
                     <div class="col-sm-8">
-                        <input type="radio" class="form-check-input" name="jenis_kelamin" value="Perempuan" /> Perempuan
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <label for="password" class="col-sm-2 col-form-label"> Password<span class="text-danger">*</span></label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" id="password" name="password" />
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <label for="confirm_password" class="col-sm-2 col-form-label"> konfirmasi password<span class="text-danger">*</span></label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" />
+                        <input type="radio" class="form-check-input" name="jenis_kelamin" value="Perempuan" <?php if ($data['user']['jenis_kelamin'] === 'Perempuan') : ?>checked<?php endif; ?> /> Perempuan
                     </div>
                 </div>
             </div>
@@ -75,7 +59,7 @@
                 </div>
                 <div>
                     <button type="reset" class="btn btn-default">Reset</button>
-                    <button type="submit" class="btn btn-primary">Simpan data</button>
+                    <button type="submit" class="btn btn-primary">Ubah Data</button>
                 </div>
             </div>
         </div>

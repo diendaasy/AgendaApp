@@ -53,7 +53,7 @@ class Agenda
         return $this->db->rowCountAffected();
     }
 
-    public function getAllAgendasNeedApproval()
+    public function getAllAgendasApprover()
     {
         $this->db->query("SELECT tja.nama_jenis as jenis_agenda, ta.keterangan, ta.agenda_id, ta.assign_at, ta.status, ta.created_at, ta.approved_at, tu.nama_karyawan AS nama_karyawan, tu2.nama_karyawan as dibuat_oleh, tu3.nama_karyawan as diapprove_oleh
         FROM $this->table ta 
@@ -65,7 +65,6 @@ class Agenda
         ON ta.created_by = tu2.user_id
         LEFT JOIN $this->tableUser tu3
         ON ta.approved_by = tu3.user_id 
-        WHERE ta.approved_at IS NULL 
         ORDER BY ta.created_at DESC");
         return $this->db->get();
     }

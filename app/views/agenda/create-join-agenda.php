@@ -7,7 +7,7 @@
         <div class="card-body">
             <div class="form-group">
                 <div class="row">
-                    <label for="assigndate" class="col-sm-2 col-form-label">Tanggal agenda</label>
+                    <label for="assigndate" class="col-sm-2 col-form-label">Tanggal agenda<span class="text-danger">*</span></label>
                     <div class="col-sm-10 input-group date" data-target-input="nearest" id="datetimepicker">
                         <input class="form-control datetimepicker-input" name="assigndate" data-target="#datetimepicker">
                         <div class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">

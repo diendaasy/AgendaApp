@@ -13,7 +13,7 @@ class Agenda
 
     public function getAllAgendas()
     {
-        $this->db->query("SELECT tja.nama_jenis as jenis_agenda, ta.keterangan, ta.agenda_id, ta.assign_at, ta.status, ta.created_at, ta.approved_at, tu.nama_karyawan AS nama_karyawan, tu2.nama_karyawan as dibuat_oleh, tu3.nama_karyawan as diapprove_oleh  
+        $this->db->query("SELECT tja.nama_jenis as jenis_agenda, ta.keterangan, ta.file_path_absen, ta.agenda_id, ta.assign_at, ta.status, ta.created_at, ta.approved_at, tu.nama_karyawan AS nama_karyawan, tu2.nama_karyawan as dibuat_oleh, tu3.nama_karyawan as diapprove_oleh  
         FROM $this->table ta 
         LEFT JOIN $this->tableJenisAgenda tja 
         ON ta.jenis_agenda_id = tja.jenis_agenda_id 
@@ -55,7 +55,7 @@ class Agenda
 
     public function getAllAgendasApprover()
     {
-        $this->db->query("SELECT tja.nama_jenis as jenis_agenda, ta.keterangan, ta.agenda_id, ta.assign_at, ta.status, ta.created_at, ta.approved_at, tu.nama_karyawan AS nama_karyawan, tu2.nama_karyawan as dibuat_oleh, tu3.nama_karyawan as diapprove_oleh
+        $this->db->query("SELECT tja.nama_jenis as jenis_agenda, ta.keterangan, ta.file_path_absen, ta.agenda_id, ta.assign_at, ta.status, ta.created_at, ta.approved_at, tu.nama_karyawan AS nama_karyawan, tu2.nama_karyawan as dibuat_oleh, tu3.nama_karyawan as diapprove_oleh
         FROM $this->table ta 
         LEFT JOIN $this->tableJenisAgenda tja 
         ON ta.jenis_agenda_id = tja.jenis_agenda_id 
@@ -92,7 +92,7 @@ class Agenda
 
     public function getAllAgendaForKaryawan($userId)
     {
-        $this->db->query("SELECT tja.nama_jenis as jenis_agenda, ta.keterangan, ta.agenda_id, ta.assign_at, ta.status, ta.created_at, ta.approved_at, tu.nama_karyawan AS nama_karyawan, tu2.nama_karyawan as dibuat_oleh, tu3.nama_karyawan as diapprove_oleh  
+        $this->db->query("SELECT tja.nama_jenis as jenis_agenda, ta.keterangan, ta.file_path_absen, ta.agenda_id, ta.assign_at, ta.status, ta.created_at, ta.approved_at, tu.nama_karyawan AS nama_karyawan, tu2.nama_karyawan as dibuat_oleh, tu3.nama_karyawan as diapprove_oleh  
         FROM $this->table ta 
         LEFT JOIN $this->tableJenisAgenda tja 
         ON ta.jenis_agenda_id = tja.jenis_agenda_id 
@@ -103,7 +103,7 @@ class Agenda
         LEFT JOIN $this->tableUser tu3
         ON ta.approved_by = tu3.user_id 
         WHERE ta.approved_at IS NOT NULL 
-        AND ta.status = 'approved' 
+        AND ta.status IN ('approved', 'done') 
         AND ta.user_id = :userId 
         ORDER BY ta.created_at DESC");
         $this->db->bind('userId', $userId);
@@ -158,5 +158,15 @@ class Agenda
     {
         $this->db->query("SELECT keterangan, assign_at FROM $this->table WHERE jenis_agenda_id IS NULL");
         return $this->db->get();
+    }
+
+    public function uploadAbsen($id, $namaFile)
+    {
+        $query = "UPDATE $this->table SET file_path_absen = :namaFile, status = 'done', updated_at = current_timestamp() WHERE agenda_id = :agendaId";
+        $this->db->query($query);
+        $this->db->bind('agendaId', $id);
+        $this->db->bind('namaFile', $namaFile);
+        $this->db->execute();
+        return $this->db->rowCountAffected();
     }
 }

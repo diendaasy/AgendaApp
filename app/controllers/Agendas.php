@@ -184,4 +184,22 @@ class Agendas extends Controller
             exit;
         }
     }
+
+    public function absen($id)
+    {
+        if (isset($_FILES['bukti_absen']) && $_FILES['bukti_absen']['error'] == UPLOAD_ERR_OK) {
+            $extension = pathinfo($_FILES['bukti_absen']['name'], PATHINFO_EXTENSION);
+            $namaFile = 'img/bukti_absen/' . str_replace(' ', '_', strtolower($_POST['filename']) . '.' . $extension);
+            if ($this->model('agenda')->uploadAbsen($id, $namaFile) > 0) {
+                move_uploaded_file($_FILES['bukti_absen']['tmp_name'], $namaFile);
+                Flasher::setFlash('success', 'Absen Tercatat', '');
+                header('Location: ' . APP_URL . '/agendas');
+                exit;
+            } else {
+                Flasher::setFlash('error', 'Absen Gagal', '');
+                header('Location:' . APP_URL . '/agendas');
+                exit;
+            }
+        }
+    }
 }

@@ -45,6 +45,55 @@ function deleteUserConfirmation(e) {
   });
 }
 
+function popupUpload(e) {
+  e.preventDefault();
+
+  let url = e.currentTarget.getAttribute("href");
+  let path = e.currentTarget.getAttribute("data-path");
+  let filename = e.currentTarget.getAttribute("data-filename");
+  filename = filename.replaceAll(" ", "_");
+
+  // Set form action
+  const form = document.querySelector("#staticBackdrop form");
+  form.setAttribute("action", url);
+
+  // Set preview image src
+  const previewImg = document.querySelector("#staticBackdrop img#preview");
+  previewImg.setAttribute(
+    "src",
+    path ? path : APP_URL + "/img/no_image_found.png"
+  );
+
+  let hiddenInput = form.querySelector('input[name="filename"]');
+  hiddenInput.value = filename;
+}
+
+function showBuktiAbsen(e) {
+  e.preventDefault();
+
+  let path = e.currentTarget.getAttribute("data-path");
+
+  // Set preview image src
+  const previewImg = document.querySelector("#showAbsen img#preview");
+  previewImg.setAttribute(
+    "src",
+    path ? path : APP_URL + "/img/no_image_found.png"
+  );
+}
+
+function previewImage(event) {
+  const input = event.target;
+  const preview = document.getElementById("preview");
+
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      preview.src = e.target.result;
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
 $(function () {
   $(".select2").select2({
     theme: "bootstrap4",
@@ -64,6 +113,22 @@ $(function () {
   $("#datetimepicker").datetimepicker({
     format: "YYYY-MM-DD",
     useCurrent: false,
+    minDate: moment(),
+  });
+
+  // Reset form and image when modal is closed
+  $("#staticBackdrop").on("hidden.bs.modal", function () {
+    const form = document.querySelector("#staticBackdrop form");
+    const previewImg = document.querySelector("#staticBackdrop img#preview");
+    let hiddenInput = form.querySelector('input[name="filename"]');
+
+    form.setAttribute("action", "");
+    previewImg.setAttribute("src", APP_URL + "/img/no_image_found.png");
+
+    // Optional: clear the file input too
+    const fileInput = form.querySelector('input[type="file"]');
+    if (fileInput) fileInput.value = "";
+    if (hiddenInput) hiddenInput.value = "";
   });
 });
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 19 Apr 2025 pada 10.06
+-- Waktu pembuatan: 20 Apr 2025 pada 13.05
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -33,6 +33,7 @@ CREATE TABLE `tbl_agenda` (
   `user_id` int(11) DEFAULT NULL,
   `status` enum('created','approved','rejected','done') NOT NULL DEFAULT 'created',
   `keterangan` text DEFAULT NULL,
+  `file_path_absen` text DEFAULT NULL,
   `assign_at` date NOT NULL,
   `read_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -48,18 +49,19 @@ CREATE TABLE `tbl_agenda` (
 -- Dumping data untuk tabel `tbl_agenda`
 --
 
-INSERT INTO `tbl_agenda` (`agenda_id`, `jenis_agenda_id`, `user_id`, `status`, `keterangan`, `assign_at`, `read_at`, `created_at`, `updated_at`, `updated_by`, `approved_at`, `approved_by`, `created_by`, `reject_reason`) VALUES
-(9, 1, 5, 'approved', 'tepat waktu!', '2025-04-15', NULL, '2025-04-15 06:35:52', '2025-04-15 06:35:52', NULL, '2025-04-15 06:37:51', 4, 2, ''),
-(10, NULL, NULL, 'approved', 'UPACARA KORPRI', '2025-04-17', NULL, '2025-04-16 05:36:36', '2025-04-16 05:36:36', NULL, '2025-04-16 05:36:36', 2, 2, ''),
-(11, NULL, NULL, 'approved', 'Jum\'at Berkah ', '2025-04-18', NULL, '2025-04-16 08:35:39', '2025-04-16 08:35:39', NULL, '2025-04-16 08:35:39', 2, 2, ''),
-(12, NULL, NULL, 'approved', 'Rapat Resmi Mitra Sensu 2026', '2025-04-30', NULL, '2025-04-16 08:36:20', '2025-04-16 09:17:49', 2, '2025-04-16 08:36:20', 2, 2, ''),
-(13, 4, 8, 'rejected', '', '2025-04-17', NULL, '2025-04-16 08:37:49', '2025-04-16 08:37:49', NULL, '2025-04-16 09:16:50', 4, 2, 'Telat'),
-(14, 6, 9, 'approved', '', '2025-04-18', NULL, '2025-04-16 08:38:11', '2025-04-16 08:38:11', NULL, '2025-04-16 08:42:16', 4, 2, ''),
-(15, 3, 1, 'approved', '', '2025-04-16', NULL, '2025-04-16 08:38:38', '2025-04-16 08:38:38', NULL, '2025-04-16 08:42:14', 4, 2, ''),
-(16, 4, 10, 'approved', 'Jam 1 siang', '2025-04-16', NULL, '2025-04-16 09:14:36', '2025-04-16 09:14:36', NULL, '2025-04-16 09:15:49', 4, 2, ''),
-(17, NULL, NULL, 'approved', 'Rapat', '2025-04-16', NULL, '2025-04-16 09:40:15', '2025-04-16 09:40:15', NULL, '2025-04-16 09:40:15', 2, 2, ''),
-(18, 1, 3, 'approved', 'haha', '2025-04-17', NULL, '2025-04-16 09:46:44', '2025-04-16 09:46:44', NULL, '2025-04-16 09:47:02', 4, 2, ''),
-(19, 2, 3, 'created', 'pp', '2025-04-20', NULL, '2025-04-19 06:19:18', '2025-04-19 06:19:18', NULL, NULL, NULL, 2, '');
+INSERT INTO `tbl_agenda` (`agenda_id`, `jenis_agenda_id`, `user_id`, `status`, `keterangan`, `file_path_absen`, `assign_at`, `read_at`, `created_at`, `updated_at`, `updated_by`, `approved_at`, `approved_by`, `created_by`, `reject_reason`) VALUES
+(9, 1, 5, 'approved', 'tepat waktu!', NULL, '2025-04-15', NULL, '2025-04-15 06:35:52', '2025-04-15 06:35:52', NULL, '2025-04-15 06:37:51', 4, 2, ''),
+(10, NULL, NULL, 'approved', 'UPACARA KORPRI', NULL, '2025-04-17', NULL, '2025-04-16 05:36:36', '2025-04-16 05:36:36', NULL, '2025-04-16 05:36:36', 2, 2, ''),
+(11, NULL, NULL, 'approved', 'Jum\'at Berkah ', NULL, '2025-04-18', NULL, '2025-04-16 08:35:39', '2025-04-16 08:35:39', NULL, '2025-04-16 08:35:39', 2, 2, ''),
+(12, NULL, NULL, 'approved', 'Rapat Resmi Mitra Sensu 2026', NULL, '2025-04-30', NULL, '2025-04-16 08:36:20', '2025-04-16 09:17:49', 2, '2025-04-16 08:36:20', 2, 2, ''),
+(13, 4, 8, 'rejected', '', NULL, '2025-04-17', NULL, '2025-04-16 08:37:49', '2025-04-16 08:37:49', NULL, '2025-04-16 09:16:50', 4, 2, 'Telat'),
+(14, 6, 9, 'approved', '', NULL, '2025-04-18', NULL, '2025-04-16 08:38:11', '2025-04-16 08:38:11', NULL, '2025-04-16 08:42:16', 4, 2, ''),
+(15, 3, 1, 'done', '', 'img/bukti_absen/15_lola_dwi_ferbyantii_2025-04-16.jpg', '2025-04-16', NULL, '2025-04-16 08:38:38', '2025-04-20 10:10:30', NULL, '2025-04-16 08:42:14', 4, 2, ''),
+(16, 4, 10, 'approved', 'Jam 1 siang', NULL, '2025-04-16', NULL, '2025-04-16 09:14:36', '2025-04-16 09:14:36', NULL, '2025-04-16 09:15:49', 4, 2, ''),
+(17, NULL, NULL, 'approved', 'Rapat', NULL, '2025-04-16', NULL, '2025-04-16 09:40:15', '2025-04-16 09:40:15', NULL, '2025-04-16 09:40:15', 2, 2, ''),
+(18, 1, 3, 'approved', 'haha', NULL, '2025-04-17', NULL, '2025-04-16 09:46:44', '2025-04-16 09:46:44', NULL, '2025-04-16 09:47:02', 4, 2, ''),
+(19, 2, 3, 'created', 'pp', NULL, '2025-04-20', NULL, '2025-04-19 06:19:18', '2025-04-19 06:19:18', NULL, NULL, NULL, 2, ''),
+(20, 1, 1, 'done', '', 'img/bukti_absen/20_lola_dwi_ferbyantii_2025-04-20.png', '2025-04-20', NULL, '2025-04-20 11:02:59', '2025-04-20 11:04:29', NULL, '2025-04-20 11:03:25', 4, 2, '');
 
 -- --------------------------------------------------------
 
@@ -152,7 +154,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT untuk tabel `tbl_agenda`
 --
 ALTER TABLE `tbl_agenda`
-  MODIFY `agenda_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `agenda_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_user`
